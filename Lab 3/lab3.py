@@ -8,13 +8,12 @@ def get_input(num):
      poly1 : 10.0 20.0, 30.0 40.0, 50.0 60.0
      poly2 : 100.0 200.0, 300.0 400.0, 500.0 600.0
     '''
-
-    print(f"Enter the coordinates for polygon {num}: ")
-    points = input('Coordinates: ').strip().split(',')
-    # polygon = [tuple(map(float, point.strip().split())) for point in points]
+    print(f'Enter coordinates for polygon {num}')
+    points = input('Enter coordinates: ').strip().split(',')
     polygon = []
 
     for point in points:
+
         x, y = point.strip().split()
         polygon.append((float(x), float(y)))
 
@@ -28,6 +27,7 @@ def compute_mahalanobis(poly1, poly2):
 
     centroid1 = np.mean(poly1, axis=0)
     centroid2 = np.mean(poly2, axis=0)
+    print(centroid1, centroid2)
 
     combined = np.vstack((poly1, poly2))
 
@@ -35,12 +35,13 @@ def compute_mahalanobis(poly1, poly2):
 
     try:
         inv_cov = np.linalg.inv(cov)
+
     except np.linalg.LinAlgError:
-        raise ValueError('Covariance matrix cannot be inverted')
+        print('Cannot inverted singular matrix')
 
-    distace = mahalanobis(centroid1, centroid2, inv_cov)
+    distance = mahalanobis(centroid1, centroid2, inv_cov)
 
-    return distace
+    return distance
 
 
 if __name__ == '__main__':
