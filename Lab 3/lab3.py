@@ -29,7 +29,7 @@ def compute_mahalanobis(poly1, poly2):
     centroid2 = np.mean(poly2, axis=0)
     print(centroid1, centroid2)
 
-    combined = np.vstack((poly1, poly2))
+    combined = np.vstack((centroid1, centroid2))
 
     cov = np.cov(combined.T)
 
